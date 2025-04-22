@@ -27,6 +27,10 @@ const Museum = connection.define("museum", {
 		type: DataTypes.GEOMETRY("POINT"),
 		allowNull: false
 	},
+	address: {
+		type: DataTypes.STRING(128),
+		allowNull: false
+	},
 	free: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false

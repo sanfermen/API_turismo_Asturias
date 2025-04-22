@@ -1,0 +1,130 @@
+import Preroman_art from "../models/preroman_art.js";
+import Council from "../models/council.js";
+import {
+	PreromanNameNotProvided,
+	PreromanImageNotProvided,
+	PreromanImageInvalid,
+	PreromanWebInvalid,
+	PreromanInfoInvalidLength,
+	PreromanUnescoNotProvided,
+	PreromanUnescoInvalid,
+	PreromanCoordinatesNotProvided,
+	PreromanCoordinatesInvalid,
+	PreromanAddressInvalidLength,
+	PreromanCouncilNotFound,
+	PreromanCouncilNotProvided
+} from "../utils/errors/preromanErrors.js"
+
+async function create(data) {
+	if (!data.name) {
+		throw new PreromanNameNotProvided();
+	}
+	if (!data.image) {
+		throw new PreromanImageNotProvided();
+	}
+	try {
+		new URL(data.image);
+	} catch (error) {
+		throw new PreromanImageInvalid();
+	}
+	try {
+		new URL(data.web);
+	} catch {
+		throw new PreromanWebInvalid();
+	}
+	if (data.information.length < 5 || data.information.length > 300) {
+		throw new PreromanInfoInvalidLength();
+	}
+	if (!data.unesco_heritage) {
+		throw new PreromanUnescoNotProvided();
+	}
+	if (data.unesco_heritage !== "boolean"){
+		throw new PreromanUnescoInvalid();
+	}
+	if (!data.coordinates) {
+		throw new PreromanCoordinatesNotProvided();
+	}
+	if (
+		!data.coordinates.type ||
+		data.coordinates.type !== "Point" ||
+		!Array.isArray(data.coordinates.coordinates) ||
+		data.coordinates.coordinates.length !== 2 ||
+		typeof data.coordinates.coordinates[0] !== "number" ||
+		typeof data.coordinates.coordinates[1] !== "number"
+	){	throw new PreromanCoordinatesInvalid();
+	}
+	if (data.address.length < 5 || data.address.length > 128) {
+		throw new PreromanAddressInvalidLength();
+	}
+	if (!data.council_id){
+		throw new PreromanCouncilNotProvided();
+	} 
+	const council = await Council.findByPk(data.council_id);
+	if (!council) {
+		throw new PreromanCouncilNotFound();
+	}
+	const response = await Preroman_art.create(data);
+	return response;
+}
+
+async function getAll() {
+	const preromans = await Preroman_art.findAll({
+		include: {
+			model: Council,
+			attributes: ["name", "zone"]
+		}
+	});
+	return preromans;
+}
+
+async function getById(id) {
+	const preroman = await Preroman_art.findByPk(id, {
+		include: {
+			model: Council,
+			attributes: ["name", "zone"]
+		}
+	});
+	return preroman;
+}
+
+async function getByCouncil(council_id) {
+	return await Preroman_art.findAll({
+		where: {
+			council_id : council_id
+		},
+		include: {
+			model: Council,
+			attributes: ["name", "zone"]
+		}
+	});
+}
+
+async function edit(id, data) {
+	const result = await Preroman_art.update(
+		data,
+		{
+			where: {
+				preroman_art_id: id
+			}
+		}
+	)
+	return result;
+}
+
+async function remove(id) {
+	const response = await Preroman_art.destroy({
+		where: {
+			preroman_art_id: id
+		}
+	});
+	return response;
+}
+
+export default {
+	create,
+	getAll,
+	getById,
+	getByCouncil,
+	edit,
+	remove
+}

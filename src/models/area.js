@@ -58,7 +58,4 @@ const Area = connection.define("area", {
 	}
 })
 
-// TODO relaciones
-
-
 export default Area;

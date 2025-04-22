@@ -35,10 +35,12 @@ Council.hasMany(Preroman_art, {foreignKey:"council_id"});
 Preroman_art.belongsTo(Council, {foreignKey:"council_id"});
 
 Council.hasMany(Beach, {foreignKey:"council_id"});
-Beach.belongsTo(Council, {primaryKey:"council_id"});
+Beach.belongsTo(Council, {foreignKey:"council_id"});
 
 Council.hasMany(Rock_art, {foreignKey:"council_id"});
 Rock_art.belongsTo(Council, {foreignKey:"council_id"});
 
 Council.hasMany(Museum, {foreignKey:"council_id"});
 Museum.belongsTo(Council, {foreignKey:"council_id"});
+
+export default Council;
