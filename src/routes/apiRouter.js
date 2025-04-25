@@ -1,0 +1,20 @@
+import { Router } from "express";
+import areaRouter from "./areaAPIRouter.js";
+import beachRouter from "./beachAPIRouter.js";
+import councilRouter from "./councilAPIRouter.js";
+import museumRouter from "./museumAPIRouter.js";
+import preromanRouter from "./preromanAPIRouter.js";
+import rockArtRouter from "./rockArtAPIRouter.js";
+import routeRouter from "./routeAPIRouter.js";
+
+const router = Router();
+
+router.use("/area", areaRouter);
+router.use("/beach", beachRouter);
+router.use("/council", councilRouter);
+router.use("/museum", museumRouter);
+router.use("/preroman", preromanRouter);
+router.use("/rockArt", rockArtRouter);
+router.use("/route", routeRouter);
+
+export default router;
