@@ -1,5 +1,5 @@
-import Rock_art from "../models/rock_art.js";
-import Council from "../models/council.js";
+import Rock_art from "../../models/rock_art.js";
+import Council from "../../models/council.js";
 import {
 	RockArtNameNotProvided,
 	RockArtImageNotProvided,
@@ -12,7 +12,7 @@ import {
 	RockArtCoordinatesInvalid,
 	RockArtCouncilNotFound,
 	RockArtCouncilNotProvided
-} from "../utils/errors/rockArtErrors.js"
+} from "../../utils/errors/rockArtErrors.js"
 
 async function create(data) {
 	if (!data.name) {
@@ -86,7 +86,7 @@ async function getById(id) {
 async function getByCouncil(council_id) {
 	return await Rock_art.findAll({
 		where: {
-			rock_art_id : council_id
+			council_id : council_id
 		},
 		include: {
 			model: Council,

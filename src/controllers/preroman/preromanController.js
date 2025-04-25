@@ -1,5 +1,5 @@
-import Preroman_art from "../models/preroman_art.js";
-import Council from "../models/council.js";
+import Preroman_art from "../../models/preroman_art.js";
+import Council from "../../models/council.js";
 import {
 	PreromanNameNotProvided,
 	PreromanImageNotProvided,
@@ -13,7 +13,7 @@ import {
 	PreromanAddressInvalidLength,
 	PreromanCouncilNotFound,
 	PreromanCouncilNotProvided
-} from "../utils/errors/preromanErrors.js"
+} from "../../utils/errors/preromanErrors.js"
 
 async function create(data) {
 	if (!data.name) {

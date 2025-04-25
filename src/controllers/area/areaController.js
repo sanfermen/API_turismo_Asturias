@@ -1,5 +1,5 @@
-import Area from "../models/area.js";
-import Council from "../models/council.js"
+import Area from "../../models/area.js";
+import Council from "../../models/council.js"
 import { 
 	AreaNameNotProvided, 
 	AreaImageNotProvided,
@@ -18,7 +18,7 @@ import {
 	AreaAddressInvalidLength,
 	AreaCouncilNotFound,
 	AreaCouncilNotProvided
-} from "../utils/errors/areaErrors.js";
+} from "../../utils/errors/areaErrors.js";
 
 async function create(data) {
 	if (!data.name) {

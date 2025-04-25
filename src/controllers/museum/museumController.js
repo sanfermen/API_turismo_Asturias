@@ -1,5 +1,5 @@
-import Museum from "../models/museum.js";
-import Council from "../models/council.js";
+import Museum from "../../models/museum.js";
+import Council from "../../models/council.js";
 import {
 	MuseumNameNotProvided,
 	MuseumImageNotProvided,
@@ -15,7 +15,7 @@ import {
 	MuseumAddressInvalidLength,
 	MuseumCouncilNotFound,
 	MuseumCouncilNotProvided
-} from "../utils/errors/museumErrors.js"
+} from "../../utils/errors/museumErrors.js"
 
 async function create(data) {
 	if (!data.name) {
