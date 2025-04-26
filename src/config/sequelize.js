@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const DB_HOST = process.env.DB_HOST;
-const DB_PORT = process.env.DB_PORT;
+const DB_PORT = 3306;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_NAME = process.env.DB_NAME;
@@ -20,16 +20,35 @@ const connection = new Sequelize(
 		define: {
 			timestamps: false,
 			freezeTableName: true
+		},
+		pool: {
+			max: 5,
+			min: 0,
+			acquire: 30000,
+			idle: 10000
+		},
+		retry: {
+			max: 5  // intenta 5 veces antes de fallar
 		}
 	}
 )
 
 async function testConnection() {
-	try {
-		await connection.authenticate();
-		console.log("Conexión con MySQL hecha.");
-	} catch (error) {
-		console.log("Imposible conectarse a la base de datos", error);
+	let retries = 5;
+	while (retries) {
+		try {
+			await connection.authenticate();
+			console.log("Conexión con MySQL hecha.");
+			break;
+		} catch (error) {
+			console.log("Imposible conectarse a la base de datos", error);
+			retries -= 1;
+			await new Promise((resolve) => setTimeout(resolve, 5000)); // Espera 5 segundos
+		}
+	}
+	if (!retries) {
+		console.error("Imposible conectarse a la base de datos");
+		process.exit(1);
 	}
 }
 
