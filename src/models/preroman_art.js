@@ -16,6 +16,14 @@ const Preroman_art = connection.define("preroman_art", {
 		type: DataTypes.STRING(128),
 		allowNull: false
 	},
+	latitude: {
+		type: DataTypes.DECIMAL(10,8),
+		allowNull: false
+	},
+	longitude: {
+		type: DataTypes.DECIMAL(11,8),
+		allowNull: false
+	},
 	unesco_heritage: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
@@ -26,10 +34,6 @@ const Preroman_art = connection.define("preroman_art", {
 	},
 	web: {
 		type: DataTypes.STRING(128)
-	},
-	coordinates: {
-		type: DataTypes.GEOMETRY("POINT"),
-		allowNull: false
 	},
 	address: {
 		type: DataTypes.STRING(128)

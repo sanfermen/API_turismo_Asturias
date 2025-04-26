@@ -32,17 +32,14 @@ async function create(data) {
 	} catch (error) {
 		throw new AreaImageInvalid();
 	}
-	if (!data.coordinates) {
+	if (data.latitude === undefined || data.latitude === null) {
 		throw new AreaCoordinatesNotProvided();
 	}
-	if (
-		!data.coordinates.type ||
-		data.coordinates.type !== "Point" ||
-		!Array.isArray(data.coordinates.coordinates) ||
-		data.coordinates.coordinates.length !== 2 ||
-		typeof data.coordinates.coordinates[0] !== "number" ||
-		typeof data.coordinates.coordinates[1] !== "number"
-	){	throw new AreaCoordinatesInvalid();
+	if (data.longitude === undefined || data.longitude === null) {
+		throw new AreaCoordinatesNotProvided();
+	}
+	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
+		throw new AreaCoordinatesInvalid();
 	}
 	if (!data.drinking_water) {
 		throw new AreaDrinkingWaterNotProvided();

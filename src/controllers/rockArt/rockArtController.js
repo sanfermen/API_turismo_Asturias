@@ -40,17 +40,14 @@ async function create(data) {
 	if (data.information.length < 5 || data.information.length > 300) {
 		throw new RockArtInfoInvalidLength();
 	}
-	if (!data.coordinates) {
+	if (data.latitude === undefined || data.latitude === null) {
 		throw new RockArtCoordinatesNotProvided();
 	}
-	if (
-		!data.coordinates.type ||
-		data.coordinates.type !== "Point" ||
-		!Array.isArray(data.coordinates.coordinates) ||
-		data.coordinates.coordinates.length !== 2 ||
-		typeof data.coordinates.coordinates[0] !== "number" ||
-		typeof data.coordinates.coordinates[1] !== "number"
-	){	throw new RockArtCoordinatesInvalid();
+	if (data.longitude === undefined || data.longitude === null) {
+		throw new RockArtCoordinatesNotProvided();
+	}
+	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
+		throw new RockArtCoordinatesNotProvided();
 	}
 	if (!data.council_id){
 		throw new RockArtCouncilNotProvided();

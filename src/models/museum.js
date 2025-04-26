@@ -16,15 +16,19 @@ const Museum = connection.define("museum", {
 		type: DataTypes.STRING(128),
 		allowNull: false
 	},
+	latitude: {
+		type: DataTypes.DECIMAL(10,8),
+		allowNull: false
+	},
+	longitude: {
+		type: DataTypes.DECIMAL(11,8),
+		allowNull: false
+	},
 	web: {
 		type: DataTypes.STRING(128)
 	},
 	information: {
 		type: DataTypes.STRING(300),
-		allowNull: false
-	},
-	coordinates: {
-		type: DataTypes.GEOMETRY("POINT"),
 		allowNull: false
 	},
 	address: {

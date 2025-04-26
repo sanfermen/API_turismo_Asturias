@@ -1,4 +1,4 @@
-import createToken from "../../utils/token.js";
+import { createToken } from "../../utils/token.js";
 import authController from "./authController.js";
 
 async function register(req, res) {
@@ -55,3 +55,9 @@ function logout(req, res) {
 	req.session.user = undefined;
 	res.json({ message: "Sesión cerrada correctamente" });
 }
+
+export default {
+	register,
+	login,
+	logout
+};

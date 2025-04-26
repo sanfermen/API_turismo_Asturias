@@ -17,10 +17,13 @@ const Area = connection.define("area", {
 		type: DataTypes.STRING(128),
 		allowNull: false
 	},
-	coordinates: {
-		type: DataTypes.GEOMETRY("POINT"),
-		allowNull: false,
-		unique: true
+	latitude: {
+		type: DataTypes.DECIMAL(10,8),
+		allowNull: false
+	},
+	longitude: {
+		type: DataTypes.DECIMAL(11,8),
+		allowNull: false
 	},
 	drinking_water: {
 		type: DataTypes.BOOLEAN,

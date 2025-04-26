@@ -30,10 +30,13 @@ const Route = connection.define("route", {
 		type: DataTypes.INTEGER.UNSIGNED,
 		allowNull: false
 	},
-	coordinates: {
-		type: DataTypes.GEOMETRY("POINT"),
-		allowNull: false,
-		unique: true
+	latitude: {
+		type: DataTypes.DECIMAL(10,8),
+		allowNull: false
+	},
+	longitude: {
+		type: DataTypes.DECIMAL(11,8),
+		allowNull: false
 	},
 	time: {
 		type: DataTypes.STRING(45)

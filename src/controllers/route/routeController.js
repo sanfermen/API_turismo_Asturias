@@ -42,17 +42,14 @@ async function create(data) {
 	if (!data.distance) {
 		throw new RouteDistanceNotProvided();
 	}
-	if (!data.coordinates) {
+	if (data.latitude === undefined || data.latitude === null) {
 		throw new RouteCoordinatesNotProvided();
 	}
-	if (
-		!data.coordinates.type ||
-		data.coordinates.type !== "Point" ||
-		!Array.isArray(data.coordinates.coordinates) ||
-		data.coordinates.coordinates.length !== 2 ||
-		typeof data.coordinates.coordinates[0] !== "number" ||
-		typeof data.coordinates.coordinates[1] !== "number"
-	){	throw new RouteCoordinatesInvalid();
+	if (data.longitude === undefined || data.longitude === null) {
+		throw new RouteCoordinatesNotProvided();
+	}
+	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
+		throw new RouteCoordinatesInvalid();
 	}
 	if (!data.council_id){
 		throw new RouteCouncilNotProvided();

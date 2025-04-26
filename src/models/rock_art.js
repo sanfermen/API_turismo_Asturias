@@ -16,6 +16,14 @@ const Rock_art = connection.define("rock_art", {
 		type: DataTypes.STRING(128),
 		allowNull: false
 	},
+	latitude: {
+		type: DataTypes.DECIMAL(10,8),
+		allowNull: false
+	},
+	longitude: {
+		type: DataTypes.DECIMAL(11,8),
+		allowNull: false
+	},
 	period: {
 		type: DataTypes.STRING(45),
 		allowNull: false
@@ -26,10 +34,6 @@ const Rock_art = connection.define("rock_art", {
 	},
 	web: {
 		type: DataTypes.STRING(128)
-	},
-	coordinates: {
-		type: DataTypes.GEOMETRY("POINT"),
-		allowNull: false
 	},
 	council_id: {
 		type: DataTypes.INTEGER.UNSIGNED,
