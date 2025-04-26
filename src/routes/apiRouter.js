@@ -6,6 +6,8 @@ import museumRouter from "./museumAPIRouter.js";
 import preromanRouter from "./preromanAPIRouter.js";
 import rockArtRouter from "./rockArtAPIRouter.js";
 import routeRouter from "./routeAPIRouter.js";
+import userRouter from "./userAPIRouter.js";
+import authRouter from "./authAPIRouter.js";
 
 const router = Router();
 
@@ -16,5 +18,7 @@ router.use("/museum", museumRouter);
 router.use("/preroman", preromanRouter);
 router.use("/rockArt", rockArtRouter);
 router.use("/route", routeRouter);
+router.use("/user", userRouter);
+router.use("/auth", authRouter);
 
 export default router;
