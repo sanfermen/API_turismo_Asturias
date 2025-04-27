@@ -47,12 +47,12 @@ async function login(email, password) {
 	if (!password) {
 		throw new UserPasswordNotProvided();
 	}
-
 	const user = await User.findOne({
 		where: {
 			email: email
 		}
 	})
+	
 	if (!user) {
 		throw new UserInvalidCredentials();
 	}

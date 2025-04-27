@@ -1,6 +1,6 @@
 import { verifyToken } from "../utils/token.js";
 
-function authenticateToken(req, res, next) {
+export function authenticateToken(req, res, next) {
 	const authHeader = req.headers.authorization;
 	console.log("authorization", authHeader);
 	if (!authHeader) {
@@ -24,5 +24,3 @@ function authenticateToken(req, res, next) {
 		return res.status(403).json({ error: "Token inválido o expirado" });
 	}
 }
-
-export default authenticateToken;

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import userAPIController from "../controllers/user/userAPIController.js";
-import authenticateToken from "../middleware/authToken.js";
-import requireAdmin from "../middleware/requireAdmin.js";
+import { authenticateToken } from "../middleware/authToken.js";
+import { requireAdmin } from "../middleware/requireAdmin.js";
 
 const router = Router();
 
