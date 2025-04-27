@@ -2,6 +2,7 @@ import { verifyToken } from "../utils/token.js";
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers.authorization;
+	console.log("authorization", authHeader);
 	if (!authHeader) {
 		return res.status(401).json({ error: "Token no proporcionado"});
 	}
