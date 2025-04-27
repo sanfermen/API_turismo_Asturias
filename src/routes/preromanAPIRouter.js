@@ -18,9 +18,9 @@ router.get("/:id", authenticateToken, preromanAPIController.getByID);
 router.get("/by-council/:council_id", authenticateToken, preromanAPIController.getByCouncil);
 
 // Editar un sitio de arte prerrománico con su id
-router.post("/:id", authenticateToken, requireAdmin, preromanAPIController.edit);
+router.put("/:id", authenticateToken, requireAdmin, preromanAPIController.edit);
 
 // borrar un sitio de arte prerrománico
-router.post("/:id/delete", authenticateToken, requireAdmin, preromanAPIController.remove)
+router.delete("/:id", authenticateToken, requireAdmin, preromanAPIController.remove)
 
 export default router;

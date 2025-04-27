@@ -18,9 +18,9 @@ router.get("/:id", authenticateToken,areaAPIController.getByID);
 router.get("/by-council/:council_id", authenticateToken, areaAPIController.getByCouncil);
 
 // Editar un área con su id
-router.post("/:id", authenticateToken, requireAdmin, areaAPIController.edit);
+router.put("/:id", authenticateToken, requireAdmin, areaAPIController.edit);
 
 // borrar un área
-router.post("/:id/delete", authenticateToken, requireAdmin, areaAPIController.remove)
+router.delete("/:id", authenticateToken, requireAdmin, areaAPIController.remove)
 
 export default router;

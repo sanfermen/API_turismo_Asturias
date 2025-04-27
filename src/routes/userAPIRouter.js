@@ -12,9 +12,9 @@ router.get("/", authenticateToken, requireAdmin, userAPIController.getAllUsers);
 router.get("/:id", authenticateToken, userAPIController.getUserById);
 
 // Editar un usuario, solo él mismo
-router.post("/:id", authenticateToken, userAPIController.updateUser);
+router.put("/:id", authenticateToken, userAPIController.updateUser);
 
 // Eliminar un usuario, solo si eres el Administrador
-router.post("/:id/delete", authenticateToken, requireAdmin, userAPIController.deleteUser);
+router.delete("/:id", authenticateToken, requireAdmin, userAPIController.deleteUser);
 
 export default router;

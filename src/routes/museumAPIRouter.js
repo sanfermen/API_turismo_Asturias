@@ -18,9 +18,9 @@ router.get("/:id", authenticateToken, museumAPIController.getByID);
 router.get("/by-council/:council_id", authenticateToken, museumAPIController.getByCouncil);
 
 // Editar un museo con su id
-router.post("/:id", authenticateToken, requireAdmin, museumAPIController.edit);
+router.put("/:id", authenticateToken, requireAdmin, museumAPIController.edit);
 
 // Borrar un museo
-router.post("/:id/delete", authenticateToken, requireAdmin, museumAPIController.remove)
+router.delete("/:id", authenticateToken, requireAdmin, museumAPIController.remove)
 
 export default router;

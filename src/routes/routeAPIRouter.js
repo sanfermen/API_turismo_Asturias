@@ -18,9 +18,9 @@ router.get("/:id", authenticateToken, routeAPIController.getByID);
 router.get("/by-council/:council_id", authenticateToken, routeAPIController.getByCouncil);
 
 // Editar una ruta con su id
-router.post("/:id", authenticateToken, requireAdmin, routeAPIController.edit);
+router.put("/:id", authenticateToken, requireAdmin, routeAPIController.edit);
 
 // Borrar una ruta
-router.post("/:id/delete", authenticateToken, requireAdmin, routeAPIController.remove)
+router.delete("/:id", authenticateToken, requireAdmin, routeAPIController.remove)
 
 export default router;

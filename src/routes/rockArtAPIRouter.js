@@ -18,9 +18,9 @@ router.get("/:id", authenticateToken, rockArtAPIController.getByID);
 router.get("/by-council/:council_id", authenticateToken, rockArtAPIController.getByCouncil);
 
 // Editar un sitio de arte rupestre con su id
-router.post("/:id", authenticateToken, requireAdmin, rockArtAPIController.edit);
+router.put("/:id", authenticateToken, requireAdmin, rockArtAPIController.edit);
 
 // Borrar un sitio de arte rupestre
-router.post("/:id/delete", authenticateToken, requireAdmin, rockArtAPIController.remove)
+router.delete("/:id", authenticateToken, requireAdmin, rockArtAPIController.remove)
 
 export default router;
