@@ -1,24 +1,26 @@
 import { Router } from "express";
 import areaAPIController from "../controllers/area/areaAPIController.js";
+import { authenticateToken } from "../middleware/authToken.js";
+import { requireAdmin } from "../middleware/requireAdmin.js";
 
 const router = Router();
 
 // Conseguir todas las áreas
-router.get("/", areaAPIController.getAll);
+router.get("/", authenticateToken, areaAPIController.getAll);
 
 // Crear una nueva área
-router.post("/", areaAPIController.create);
+router.post("/", authenticateToken, requireAdmin, areaAPIController.create);
 
 // Conseguir un área por su id
-router.get("/:id", areaAPIController.getByID);
+router.get("/:id", authenticateToken,areaAPIController.getByID);
 
 // Conseguir las areas de un concejo
-router.get("/by-council/:council_id", areaAPIController.getByCouncil);
+router.get("/by-council/:council_id", authenticateToken, areaAPIController.getByCouncil);
 
 // Editar un área con su id
-router.post("/:id", areaAPIController.edit);
+router.post("/:id", authenticateToken, requireAdmin, areaAPIController.edit);
 
 // borrar un área
-router.post("/:id/delete", areaAPIController.remove)
+router.post("/:id/delete", authenticateToken, requireAdmin, areaAPIController.remove)
 
 export default router;

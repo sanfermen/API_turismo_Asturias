@@ -1,24 +1,26 @@
 import { Router } from "express";
 import museumAPIController from "../controllers/museum/museumAPIController.js";
+import { authenticateToken } from "../middleware/authToken.js";
+import { requireAdmin } from "../middleware/requireAdmin.js";
 
 const router = Router();
 
 // Conseguir todos los museos
-router.get("/", museumAPIController.getAll);
+router.get("/", authenticateToken, museumAPIController.getAll);
 
 // Crear una nuevo museo
-router.post("/", museumAPIController.create);
+router.post("/", authenticateToken, requireAdmin, museumAPIController.create);
 
 // Conseguir un museo por su id
-router.get("/:id", museumAPIController.getByID);
+router.get("/:id", authenticateToken, museumAPIController.getByID);
 
 // Conseguir los museos de un concejo
-router.get("/by-council/:council_id", museumAPIController.getByCouncil);
+router.get("/by-council/:council_id", authenticateToken, museumAPIController.getByCouncil);
 
 // Editar un museo con su id
-router.post("/:id", museumAPIController.edit);
+router.post("/:id", authenticateToken, requireAdmin, museumAPIController.edit);
 
 // Borrar un museo
-router.post("/:id/delete", museumAPIController.remove)
+router.post("/:id/delete", authenticateToken, requireAdmin, museumAPIController.remove)
 
 export default router;
