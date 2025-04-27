@@ -13,7 +13,7 @@ const Museum = connection.define("museum", {
 		allowNull: false
 	},
 	image: {
-		type: DataTypes.STRING(128),
+		type: DataTypes.STRING(300),
 		allowNull: false
 	},
 	latitude: {

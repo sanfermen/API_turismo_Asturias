@@ -14,7 +14,7 @@ const Beach = connection.define("beach", {
 		allowNull: false
 	},
 	image: {
-		type: DataTypes.STRING(128),
+		type: DataTypes.STRING(300),
 		allowNull: false
 	},
 	information: {

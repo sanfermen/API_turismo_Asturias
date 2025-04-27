@@ -14,7 +14,7 @@ const Area = connection.define("area", {
 		unique: true
 	},
 	image: {
-		type: DataTypes.STRING(128),
+		type: DataTypes.STRING(300),
 		allowNull: false
 	},
 	latitude: {
@@ -41,7 +41,7 @@ const Area = connection.define("area", {
 		type: DataTypes.INTEGER.UNSIGNED
 	},
 	access: {
-		type: DataTypes.STRING(255)
+		type: DataTypes.STRING(300)
 	},
 	type: {
 		type: DataTypes.ENUM("public", "private"),

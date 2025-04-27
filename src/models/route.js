@@ -13,7 +13,7 @@ const Route = connection.define("route", {
 		allowNull: false
 	},
 	image: {
-		type: DataTypes.STRING(128),
+		type: DataTypes.STRING(300),
 		allowNull: false
 	},
 	information: {

@@ -13,7 +13,7 @@ const Preroman_art = connection.define("preroman_art", {
 		allowNull: false
 	},
 	image: {
-		type: DataTypes.STRING(128),
+		type: DataTypes.STRING(300),
 		allowNull: false
 	},
 	latitude: {
