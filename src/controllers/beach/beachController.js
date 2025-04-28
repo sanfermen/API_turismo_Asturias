@@ -1,6 +1,5 @@
 import Beach from "../../models/beach.js";
 import Council from "../../models/council.js";
-import Beach from "../../models/beach.js";
 import { 
 	BeachNotFound,
 	BeachNotFoundInCouncil,

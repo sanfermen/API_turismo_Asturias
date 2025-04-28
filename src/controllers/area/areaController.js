@@ -64,7 +64,7 @@ async function create(data) {
 	if (!data.type) {
 		throw new AreaTypeNotProvided();
 	}
-	if (data.type !== "public" || data.type !== "private") {
+	if (data.type !== "public" && data.type !== "private") {
 		throw new AreaTypeInvalid();
 	}
 	if (!data.address) {
@@ -82,7 +82,7 @@ async function create(data) {
 	}
 	const response = await Area.create(data);
 	return response;
-} // TODO necesario poner todos los errores?
+} 
 
 async function getAll() {
 	const areas = await Area.findAll({

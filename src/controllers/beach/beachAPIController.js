@@ -23,7 +23,10 @@ async function getByID(req, res) {
 
 async function getByCouncil(req, res) {
 	try {
-		const council_id = req.params.council_id;
+		const council_id = parseInt(req.params.council_id, 10);
+		if (isNaN(council_id)) {
+			return res.status(400).json({ error: "El ID del concejo debe ser un número válido" });
+		}
 		const beaches = await beachController.getByCouncil(council_id);
 		res.json(beaches);
 	} catch (error) {
