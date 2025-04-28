@@ -24,7 +24,7 @@ const Route = connection.define("route", {
 		type: DataTypes.STRING(300)
 	},
 	track: {
-		type: DataTypes.STRING(128)
+		type: DataTypes.STRING(200)
 	},
 	distance: {
 		type: DataTypes.INTEGER.UNSIGNED,

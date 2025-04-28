@@ -17,7 +17,11 @@ async function getByID(req, res) {
 		res.json(beach);
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: "Error del servidor" });
+        if (error.statusCode) {
+            res.status(error.statusCode).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Error del servidor" });
+        }
 	}
 }
 
@@ -31,7 +35,11 @@ async function getByCouncil(req, res) {
 		res.json(beaches);
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({error: "Error del servidor"});
+        if (error.statusCode) {
+            res.status(error.statusCode).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "Error del servidor" });
+        }
 	}
 }
 

@@ -43,19 +43,19 @@ async function create(data) {
 	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
 		throw new AreaCoordinatesInvalid();
 	}
-	if (!data.drinking_water) {
+	if (data.drinking_water === undefined || data.drinking_water === null) {
 		throw new AreaDrinkingWaterNotProvided();
 	}
 	if (typeof data.drinking_water !== "boolean") {
 		throw new AreaDrinkingWaterInvalid();
 	}
-	if (!data.waste_water) {
+	if (data.waste_water === undefined || data.waste_water === null) {
 		throw new AreaWasteWaterNotProvided();
 	}
 	if (typeof data.waste_water !== "boolean") {
 		throw new AreaWasteWaterInvalid();
 	}
-	if (!data.black_water) {
+	if (data.black_water === undefined || data.black_water === null) {
 		throw new AreaBlackWaterNotProvided();
 	}
 	if (typeof data.black_water !== "boolean") {

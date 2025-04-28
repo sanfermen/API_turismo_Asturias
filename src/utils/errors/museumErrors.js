@@ -57,7 +57,7 @@ export class MuseumCoordinatesInvalid extends Error {
 
 export class MuseumPriceNotProvided extends Error {
 	constructor(){
-		super("Museo gratis sí o no no introducido");
+		super("Museo gratis sí o no, no introducido");
 		this.statusCode = 400;
 	}
 }

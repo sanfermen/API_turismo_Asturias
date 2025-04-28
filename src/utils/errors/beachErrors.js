@@ -14,7 +14,7 @@ export class BeachCouncilNotFound extends Error {
 
 export class BeachNotFoundInCouncil extends Error {
 	constructor(){
-		super("No existen áreas en el concejo indicado");
+		super("No existen playas en el concejo indicado");
 		this.statusCode = 400;
 	}
 }

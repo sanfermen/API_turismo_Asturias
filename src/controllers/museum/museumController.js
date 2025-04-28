@@ -31,10 +31,12 @@ async function create(data) {
 	} catch (error) {
 		throw new MuseumImageInvalid();
 	}
-	try {
-		new URL(data.web);
-	} catch {
-		throw new MuseumWebInvalid();
+	if (data.web) {
+		try {
+			new URL(data.web);
+		} catch {
+			throw new MuseumWebInvalid();
+		}
 	}
 	if (!data.information) {
 		throw new MuseumInfoNotProvided();
@@ -51,10 +53,10 @@ async function create(data) {
 	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
 		throw new MuseumCoordinatesInvalid();
 	}
-	if (!data.free) {
+	if (data.free === undefined || data.free === null) {
 		throw new MuseumPriceNotProvided();
 	}
-	if (data.free !== "boolean") {
+	if (typeof data.free !== "boolean") {
 		throw new MuseumPriceInvalid();
 	}
 	if (!data.address) {
@@ -114,6 +116,7 @@ async function getByCouncil(council_id) {
 	if (museums.length === 0) {
 		throw new MuseumNotFoundInCouncil();
 	}
+	return museums;
 }
 
 async function edit(id, data) {

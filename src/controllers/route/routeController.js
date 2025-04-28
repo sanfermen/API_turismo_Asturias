@@ -35,11 +35,15 @@ async function create(data) {
 	if (data.information.length < 5 || data.information.length > 300) {
 		throw new RouteInfoInvalidLength();
 	}
-	if (data.comments.length < 5 || data.comments.length > 300) {
-		throw new RouteCommentsInvalidLength();
+	if (data.comments) {
+		if (data.comments.length < 5 || data.comments.length > 300) {
+			throw new RouteCommentsInvalidLength();
+		}
 	}
-	if (data.comments.length < 5 || data.comments.length > 128) {
-		throw new RouteTrackInvalidLength();
+	if (data.track) {
+		if (data.track.length < 5 || data.track.length > 200) {
+			throw new RouteTrackInvalidLength();
+		}
 	}
 	if (!data.distance) {
 		throw new RouteDistanceNotProvided();
@@ -101,7 +105,7 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
-	if (!routes.length === 0) {
+	if (routes.length === 0) {
 		throw new RouteNotFoundInCouncil();
 	}
 	return routes;

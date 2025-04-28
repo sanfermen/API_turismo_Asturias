@@ -31,10 +31,12 @@ async function create(data) {
 	if (!data.period) {
 		throw new RockArtPeriodNotProvided();
 	}
-	try {
-		new URL(data.web);
-	} catch {
-		throw new RockArtWebInvalid();
+	if (data.web) {
+		try {
+			new URL(data.web);
+		} catch {
+			throw new RockArtWebInvalid();
+		}
 	}
 	if (!data.information) {
 		throw new RockArtInfoNotProvided();

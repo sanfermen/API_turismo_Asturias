@@ -29,18 +29,22 @@ async function create(data) {
 	} catch (error) {
 		throw new PreromanImageInvalid();
 	}
-	try {
-		new URL(data.web);
-	} catch {
-		throw new PreromanWebInvalid();
+	if (data.web) {
+		try {
+			new URL(data.web);
+		} catch {
+			throw new PreromanWebInvalid();
+		}
 	}
-	if (data.information.length < 5 || data.information.length > 300) {
-		throw new PreromanInfoInvalidLength();
+	if (data.information) {
+		if (data.information.length < 5 || data.information.length > 300) {
+			throw new PreromanInfoInvalidLength();
+		}
 	}
-	if (!data.unesco_heritage) {
+	if (data.unesco_heritage === undefined || data.unesco_heritage === null) {
 		throw new PreromanUnescoNotProvided();
 	}
-	if (data.unesco_heritage !== "boolean"){
+	if (typeof data.unesco_heritage !== "boolean"){
 		throw new PreromanUnescoInvalid();
 	}
 	if (data.latitude === undefined || data.latitude === null) {
@@ -52,8 +56,10 @@ async function create(data) {
 	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
 		throw new PreromanCoordinatesInvalid();
 	}
-	if (data.address.length < 5 || data.address.length > 128) {
-		throw new PreromanAddressInvalidLength();
+	if (data.address) {
+		if (data.address.length < 5 || data.address.length > 128) {
+			throw new PreromanAddressInvalidLength();
+		}
 	}
 	if (!data.council_id){
 		throw new PreromanCouncilNotProvided();
