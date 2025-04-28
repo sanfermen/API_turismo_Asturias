@@ -12,7 +12,9 @@ import {
 	PreromanCoordinatesInvalid,
 	PreromanAddressInvalidLength,
 	PreromanCouncilNotFound,
-	PreromanCouncilNotProvided
+	PreromanCouncilNotProvided,
+	PreromanNotFound,
+	PreromanNotFoundInCouncil
 } from "../../utils/errors/preromanErrors.js"
 
 async function create(data) {
@@ -81,11 +83,18 @@ async function getById(id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (!preroman) {
+		throw new PreromanNotFound();
+	}
 	return preroman;
 }
 
 async function getByCouncil(council_id) {
-	return await Preroman_art.findAll({
+	const council = await Council.findByPk(council_id);
+	if (!council) {
+		throw new PreromanCouncilNotFound();
+	}
+	const preroman = await Preroman_art.findAll({
 		where: {
 			council_id : council_id
 		},
@@ -94,9 +103,17 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (preroman.length === 0) {
+			throw new PreromanNotFoundInCouncil();
+		}
+		return preroman;
 }
 
 async function edit(id, data) {
+	const preroman = await Preroman_art.findByPk(id);
+    if (!preroman) {
+        throw new PreromanNotFound();
+    }
 	const result = await Preroman_art.update(
 		data,
 		{
@@ -109,6 +126,10 @@ async function edit(id, data) {
 }
 
 async function remove(id) {
+	const preroman = await Preroman_art.findByPk(id);
+    if (!preroman) {
+        throw new PreromanNotFound();
+    }
 	const response = await Preroman_art.destroy({
 		where: {
 			preroman_art_id: id

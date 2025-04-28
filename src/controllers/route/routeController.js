@@ -12,7 +12,9 @@ import {
 	RouteCoordinatesNotProvided,
 	RouteCoordinatesInvalid,
 	RouteCouncilNotFound,
-	RouteCouncilNotProvided
+	RouteCouncilNotProvided,
+	RouteNotFound,
+	RouteNotFoundInCouncil
 } from "../../utils/errors/routeErrors.js"
 
 async function create(data) {
@@ -78,12 +80,19 @@ async function getById(id) {
 			model: Council,
 			attributes: ["name", "zone"]
 		}
-	})
+	});
+	if (!route) {
+		throw new RouteNotFound();
+	}
 	return route;
 }
 
 async function getByCouncil(council_id) {
-	return await Route.findAll({
+	const council = await Council.findByPk(council_id);
+	if (!council) {
+		throw new RouteCouncilNotFound();
+	}
+	const routes = await Route.findAll({
 		where: {
 			council_id: council_id
 		},
@@ -92,9 +101,17 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (!routes.length === 0) {
+		throw new RouteNotFoundInCouncil();
+	}
+	return routes;
 }
 
 async function edit(id, data) {
+	const route = await Route.findByPk(id);
+    if (!route) {
+        throw new RouteNotFound();
+    }
 	const result = await Route.update(
 		data,
 		{
@@ -107,6 +124,10 @@ async function edit(id, data) {
 }
 
 async function remove(id) {
+	const route = await Route.findByPk(id);
+    if (!route) {
+        throw new RouteNotFound();
+    }
 	const response = await Route.destroy({
 		where: {
 			route_id: id

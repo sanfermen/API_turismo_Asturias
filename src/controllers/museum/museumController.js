@@ -14,7 +14,9 @@ import {
 	MuseumAddressNotProvided,
 	MuseumAddressInvalidLength,
 	MuseumCouncilNotFound,
-	MuseumCouncilNotProvided
+	MuseumCouncilNotProvided,
+	MuseumNotFound,
+	MuseumNotFoundInCouncil
 } from "../../utils/errors/museumErrors.js"
 
 async function create(data) {
@@ -89,12 +91,18 @@ async function getById(id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (!museum) {
+		throw new MuseumNotFound();
+	}
 	return museum;
 }
-//TODO errores de id?
 
 async function getByCouncil(council_id) {
-	return await Museum.findAll({
+	const council = await Council.findByPk(council_id);
+	if (!council) {
+		throw new MuseumCouncilNotFound();
+	}
+	const museums = await Museum.findAll({
 		where: {
 			council_id : council_id
 		},
@@ -103,9 +111,16 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (museums.length === 0) {
+		throw new MuseumNotFoundInCouncil();
+	}
 }
 
 async function edit(id, data) {
+	const museum = await Museum.findByPk(id);
+    if (!museum) {
+        throw new MuseumNotFound();
+    }
 	const result = await Museum.update(
 		data,
 		{
@@ -118,6 +133,10 @@ async function edit(id, data) {
 }
 
 async function remove(id) {
+	const museum = await Museum.findByPk(id);
+    if (!museum) {
+        throw new MuseumNotFound();
+    }
 	const response = await Museum.destroy({
 		where: {
 			museum_id: id

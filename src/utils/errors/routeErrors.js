@@ -81,3 +81,17 @@ export class RouteCouncilNotFound extends Error {
 		this.statusCode = 400;
 	}
 }
+
+export class RouteNotFound extends Error {
+	constructor(){
+		super("El id de la ruta introducido no existe");
+		this.statusCode = 400;
+	}
+}
+
+export class RouteNotFoundInCouncil extends Error {
+	constructor(){
+	super("No exinten rutas en el concejo indicado");
+	this.statusCode = 400;
+	}
+}

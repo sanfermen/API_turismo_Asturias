@@ -97,3 +97,16 @@ export class MuseumCouncilNotFound extends Error {
 	}
 }
 
+export class MuseumNotFound extends Error {
+	constructor() {
+		super("No existe ningún museo con ese id");
+		this.statusCode = 400;
+	}
+}
+
+export class MuseumNotFoundInCouncil extends Error {
+	constructor() {
+		super("No existen museos en el concejo indicado");
+		this.statusCode = 400;
+	}
+}

@@ -52,8 +52,7 @@ async function login(req, res) {
 }
 
 function logout(req, res) {
-	req.session.user = undefined;
-	res.json({ message: "Sesión cerrada correctamente" });
+    res.json({ message: "Sesión cerrada correctamente" });
 }
 
 export default {

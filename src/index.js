@@ -9,10 +9,6 @@ dotenv.config();
 const APP_PORT = process.env.APP_PORT;
 const app = express();
 
-// Cualquier archivo dentro de la carpeta public se puede acceder desde el navegador
-/* app.use(express.static("public"));
-; */ //TODO preguntar a Danel, creo que no necesito nada de esto
-
 app.use(cors()); // Para que se puedan hacer peticiones desde otro dominio (frontend en React)
 app.use(express.json());
 

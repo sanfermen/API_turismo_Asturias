@@ -76,3 +76,17 @@ export class RockArtCouncilNotFound extends Error {
 		this.statusCode = 400;
 	}
 }
+
+export class RockArtNotFound extends Error {
+	constructor() {
+		super("El id de arte rupestre introducido no existe");
+		this.statusCode = 400;
+	}
+}
+
+export class RockArtNotFoundInCouncil extends Error {
+	constructor() {
+		super("No existe arte rupestre en el concejo indicado");
+		this.statusCode = 400;
+	}
+}

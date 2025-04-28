@@ -118,3 +118,17 @@ export class AreaCouncilNotFound extends Error {
 		this.statusCode = 400;
 	}
 }
+
+export class AreaNotFound extends Error {
+	constructor(){
+		super("El id de área indicado no existe");
+		this.statusCode = 400;
+	}
+}
+
+export class AreaNotFoundInCouncil extends Error {
+	constructor(){
+		super("No existen áreas en el concejo indicado");
+		this.statusCode = 400;
+	}
+}

@@ -17,7 +17,9 @@ import {
 	AreaAddressNotProvided,
 	AreaAddressInvalidLength,
 	AreaCouncilNotFound,
-	AreaCouncilNotProvided
+	AreaCouncilNotProvided,
+	AreaNotFound,
+	AreaNotFoundInCouncil
 } from "../../utils/errors/areaErrors.js";
 
 async function create(data) {
@@ -99,12 +101,19 @@ async function getById(id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (!area) {
+		throw new AreaNotFound();
+	}
 	return area;
 }
-//TODO errores de id?
 
 async function getByCouncil(council_id) {
-	return await Area.findAll({
+	const council = await Council.findByPk(council_id);
+	if (!council) {
+		throw new AreaCouncilNotFound();
+	}
+	
+	const areas = await Area.findAll({
 		where: {
 			council_id : council_id
 		},
@@ -113,9 +122,18 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
+
+	if (areas.length === 0) {
+		throw new AreaNotFoundInCouncil();
+	}
+	return areas;
 }
 
 async function edit(id, data) {
+	const area = await Area.findByPk(id);
+    if (!area) {
+        throw new AreaNotFound();
+    }
 	const result = await Area.update(
 		data,
 		{
@@ -128,6 +146,10 @@ async function edit(id, data) {
 }
 
 async function remove(id) {
+	const area = await Area.findByPk(id);
+    if (!area) {
+        throw new AreaNotFound();
+    }
 	const response = await Area.destroy({
 		where: {
 			area_id: id

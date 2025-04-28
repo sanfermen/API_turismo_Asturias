@@ -11,7 +11,9 @@ import {
 	RockArtCoordinatesNotProvided,
 	RockArtCoordinatesInvalid,
 	RockArtCouncilNotFound,
-	RockArtCouncilNotProvided
+	RockArtCouncilNotProvided,
+	RockArtNotFound,
+	RockArtNotFoundInCouncil
 } from "../../utils/errors/rockArtErrors.js"
 
 async function create(data) {
@@ -47,7 +49,7 @@ async function create(data) {
 		throw new RockArtCoordinatesNotProvided();
 	}
 	if (typeof data.latitude !== "number" || typeof data.longitude !== "number") {
-		throw new RockArtCoordinatesNotProvided();
+		throw new RockArtCoordinatesInvalid();
 	}
 	if (!data.council_id){
 		throw new RockArtCouncilNotProvided();
@@ -77,11 +79,18 @@ async function getById(id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (!rockArt) {
+		throw new RockArtNotFound();
+	}
 	return rockArt;
 }
 
 async function getByCouncil(council_id) {
-	return await Rock_art.findAll({
+	const council = await Council.findByPk(council_id);
+	if (!council) {
+		throw new RockArtCouncilNotFound();
+	}
+	const rockArt = await Rock_art.findAll({
 		where: {
 			council_id : council_id
 		},
@@ -90,9 +99,17 @@ async function getByCouncil(council_id) {
 			attributes: ["name", "zone"]
 		}
 	});
+	if (rockArt.length === 0) {
+		throw new RockArtNotFoundInCouncil();
+	}
+	return rockArt;
 }
 
 async function edit(id, data) {
+	const rock_art = await Rock_art.findByPk(id);
+    if (!rock_art) {
+        throw new RockArtNotFound();
+    }
 	const result = await Rock_art.update(
 		data,
 		{
@@ -105,6 +122,10 @@ async function edit(id, data) {
 }
 
 async function remove(id) {
+	const rock_art = await Rock_art.findByPk(id);
+    if (!rock_art) {
+        throw new RockArtNotFound();
+    }
 	const response = await Rock_art.destroy({
 		where: {
 			rock_art_id: id

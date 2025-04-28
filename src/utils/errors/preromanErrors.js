@@ -82,3 +82,17 @@ export class PreromanCouncilNotFound extends Error {
 		this.statusCode = 400;
 	}
 }
+
+export class PreromanNotFound extends Error {
+	constructor() {
+		super("El id de arte prerrománico introducido no existe");
+		this.statusCode = 400;
+	}
+}
+
+export class PreromanNotFoundInCouncil extends Error {
+	constructor() {
+		super("No existe arte prerrománico en el concejo indicado");
+		this.statusCode = 400;
+	}
+}
