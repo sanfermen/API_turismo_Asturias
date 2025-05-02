@@ -1,6 +1,6 @@
 import visitedController from "./visitedController.js";
 
-async function create(req, res) {
+export async function create(req, res) {
 	try {
 		const result = await visitedController.create(req.body);
 		res.json(result);
@@ -14,7 +14,7 @@ async function create(req, res) {
 	}
 }
 
-async function getByUserId(req, res) {
+export async function getByUserId(req, res) {
 	try {
 		const id = req.params.id;
 		const result = await visitedController.getByUserId(id);
@@ -29,7 +29,7 @@ async function getByUserId(req, res) {
 	}
 }
 
-async function edit(req, res) {
+export async function edit(req, res) {
 	try {
 		const id = req.params.id;
 		const result = await visitedController.edit(id, req.body);
@@ -44,7 +44,7 @@ async function edit(req, res) {
 	}
 }
 
-async function remove(req, res) {
+export async function remove(req, res) {
 	try {
 		const id = req.params.id;
 		const result = await visitedController.remove(id);
@@ -57,11 +57,4 @@ async function remove(req, res) {
 			res.status(500).json({ error: "Error del servidor" });
 		}
 	}
-}
-
-export default {
-	create,
-	getByUserId,
-	edit,
-	remove
 }
