@@ -8,6 +8,8 @@ import rockArtRouter from "./rockArtAPIRouter.js";
 import routeRouter from "./routeAPIRouter.js";
 import userRouter from "./userAPIRouter.js";
 import authRouter from "./authAPIRouter.js";
+import favRouter from "./favouriteAPIRouter.js";
+import visitedRouter from "./visitedAPIRouter.js";
 
 const router = Router();
 
@@ -20,5 +22,7 @@ router.use("/rockArt", rockArtRouter);
 router.use("/route", routeRouter);
 router.use("/user", userRouter);
 router.use("/auth", authRouter);
+router.use("/favourite", favRouter);
+router.use("/visited", visitedRouter);
 
 export default router;

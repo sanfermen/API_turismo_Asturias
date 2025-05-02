@@ -6,16 +6,16 @@ import { requireAdmin } from "../middleware/requireAdmin.js";
 const router = Router();
 
 // Conseguir todas las áreas
-router.get("/", authenticateToken, areaAPIController.getAll);
+router.get("/", areaAPIController.getAll);
 
 // Crear una nueva área
 router.post("/", authenticateToken, requireAdmin, areaAPIController.create);
 
 // Conseguir un área por su id
-router.get("/:id", authenticateToken,areaAPIController.getByID);
+router.get("/:id",areaAPIController.getByID);
 
 // Conseguir las areas de un concejo
-router.get("/by-council/:council_id", authenticateToken, areaAPIController.getByCouncil);
+router.get("/by-council/:council_id", areaAPIController.getByCouncil);
 
 // Editar un área con su id
 router.put("/:id", authenticateToken, requireAdmin, areaAPIController.edit);

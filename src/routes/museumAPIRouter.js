@@ -6,16 +6,16 @@ import { requireAdmin } from "../middleware/requireAdmin.js";
 const router = Router();
 
 // Conseguir todos los museos
-router.get("/", authenticateToken, museumAPIController.getAll);
+router.get("/", museumAPIController.getAll);
 
 // Crear una nuevo museo
 router.post("/", authenticateToken, requireAdmin, museumAPIController.create);
 
 // Conseguir un museo por su id
-router.get("/:id", authenticateToken, museumAPIController.getByID);
+router.get("/:id", museumAPIController.getByID);
 
 // Conseguir los museos de un concejo
-router.get("/by-council/:council_id", authenticateToken, museumAPIController.getByCouncil);
+router.get("/by-council/:council_id", museumAPIController.getByCouncil);
 
 // Editar un museo con su id
 router.put("/:id", authenticateToken, requireAdmin, museumAPIController.edit);

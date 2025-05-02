@@ -6,16 +6,16 @@ import { requireAdmin } from "../middleware/requireAdmin.js";
 const router = Router();
 
 // Conseguir todos los sitios de arte rupestre
-router.get("/", authenticateToken,rockArtAPIController.getAll);
+router.get("/", rockArtAPIController.getAll);
 
 // Crear un nuevo sitio de arte rupestre
 router.post("/", authenticateToken, requireAdmin, rockArtAPIController.create);
 
 // Conseguir un sitio de arte rupestre por su id
-router.get("/:id", authenticateToken, rockArtAPIController.getByID);
+router.get("/:id", rockArtAPIController.getByID);
 
 // Conseguir los sitios de arte rupestre de un concejo
-router.get("/by-council/:council_id", authenticateToken, rockArtAPIController.getByCouncil);
+router.get("/by-council/:council_id", rockArtAPIController.getByCouncil);
 
 // Editar un sitio de arte rupestre con su id
 router.put("/:id", authenticateToken, requireAdmin, rockArtAPIController.edit);
