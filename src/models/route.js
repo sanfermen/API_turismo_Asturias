@@ -36,7 +36,7 @@ const Route = connection.define("route", {
 		type: DataTypes.STRING(300)
 	},
 	distance: {
-		type: DataTypes.INTEGER.UNSIGNED,
+		type: DataTypes.DECIMAL(5,1).UNSIGNED,
 		allowNull: false
 	},
 	time: {
