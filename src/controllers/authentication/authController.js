@@ -64,7 +64,13 @@ async function login(email, password) {
 	}
 }
 
+async function getUserInfo(id) {
+	const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+	return user;
+}
+
 export default {
 	register,
-	login
+	login,
+	getUserInfo
 }

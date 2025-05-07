@@ -56,8 +56,15 @@ function logout(req, res) {
     res.json({ message: "Sesión cerrada correctamente" });
 }
 
+async function getUserInfo(req, res) {
+	const userId = req.user.user_id;
+	const result = await authController.getUserInfo(userId);
+	res.send({user: result});
+}
+
 export default {
 	register,
 	login,
-	logout
+	logout,
+	getUserInfo
 };

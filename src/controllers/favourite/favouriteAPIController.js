@@ -16,11 +16,10 @@ async function create(req, res) {
 
 async function getByUserId(req,res){
 	try {
-		const id = req.params.id;
+		const id = req.user.user_id;
 		const result = await favouriteController.getByUserId(id);
 		res.json(result);
 	} catch (error) {
-		console.error(error);
 		if (error.statusCode) {
 			res.status(error.statusCode).json({ error: error.message });
 		} else {
