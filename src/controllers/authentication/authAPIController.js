@@ -36,11 +36,12 @@ async function login(req, res) {
 		const result = await authController.login(email, password);
 
 		const data = {
+			name: result.name,
 			user_id: result.user_id,
 			role: result.role
 		};
 		const token = createToken(data);
-		res.json({token});
+		res.json({token:token, user:data});
 	} catch (error) {
 		console.error(error);
 		if (error.statusCode) {
