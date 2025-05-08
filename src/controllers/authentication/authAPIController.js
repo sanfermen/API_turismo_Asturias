@@ -38,6 +38,7 @@ async function login(req, res) {
 		const data = {
 			name: result.name,
 			user_id: result.user_id,
+			email: result.email,
 			role: result.role
 		};
 		const token = createToken(data);
