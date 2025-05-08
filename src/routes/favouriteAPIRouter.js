@@ -13,4 +13,7 @@ router.post("/", authenticateToken, favouriteAPIController.create);
 // Eliminar un favorito por su id
 router.delete("/:id", authenticateToken, favouriteAPIController.remove);
 
+//Extraer los favoritos con datos y agrupados por tipo
+router.get("/with-data", authenticateToken, favouriteAPIController.getWithData);
+
 export default router;

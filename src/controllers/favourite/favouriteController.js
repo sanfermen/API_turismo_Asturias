@@ -7,6 +7,12 @@ import {
 	FavouriteUserNotProvided,
 	FavouriteNotFound
 } from "../../utils/errors/favouriteErrors.js";
+import Area from "../../models/area.js";
+import Museum from "../../models/museum.js";
+import Route from "../../models/route.js";
+import Beach from "../../models/beach.js";
+import Preroman from "../../models/preroman_art.js";
+import RockArt from "../../models/rock_art.js"
 
 async function create(data) {
 	if (!data.type || !["area", "route", "beach", "museum", "preroman", "rockArt"].includes(data.type)) {
@@ -60,8 +66,48 @@ async function remove(id) {
 	return result;
 }
 
+async function getWithData(user_id) {
+	if (!user_id) throw new FavouriteUserNotProvided();
+
+	const favourites = await Favourite.findAll({ where: { user_id } });
+	const grouped = {
+		area: [],
+		route: [],
+		beach: [],
+		museum: [],
+		preroman: [],
+		rockArt: []
+	};
+
+	for (const fav of favourites) {
+		grouped[fav.type].push(fav.point_id);
+	}
+	const result = {};
+
+	if (grouped.area.length > 0) {
+		result.area = await Area.findAll({where: {area_id: grouped.area}});
+	}
+	if (grouped.route.length > 0) {
+		result.route = await Route.findAll({where: {route_id: grouped.route}});
+	}
+	if (grouped.beach.length > 0) {
+		result.beach = await Beach.findAll({where: {beach_id: grouped.beach}});
+	}
+	if (grouped.museum.length > 0) {
+		result.museum = await Museum.findAll({where: {museum_id: grouped.museum}});
+	}
+	if (grouped.preroman.length > 0) {
+		result.preroman = await Preroman.findAll({where: {preroman_id: grouped.preroman}});
+	}
+	if (grouped.rockArt.length > 0) {
+		result.rockArt = await RockArt.findAll({where: {rockArt_id: grouped.rockArt}});
+	}
+	return result;
+}
+
 export default {
 	create,
 	getByUserId,
-	remove
+	remove,
+	getWithData
 }
