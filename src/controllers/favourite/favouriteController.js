@@ -97,10 +97,10 @@ async function getWithData(user_id) {
 		result.museum = await Museum.findAll({where: {museum_id: grouped.museum}});
 	}
 	if (grouped.preroman.length > 0) {
-		result.preroman = await Preroman.findAll({where: {preroman_id: grouped.preroman}});
+		result.preroman = await Preroman.findAll({where: {preroman_art_id: grouped.preroman}});
 	}
 	if (grouped.rockArt.length > 0) {
-		result.rockArt = await RockArt.findAll({where: {rockArt_id: grouped.rockArt}});
+		result.rockArt = await RockArt.findAll({where: {rock_art_id: grouped.rockArt}});
 	}
 	return result;
 }

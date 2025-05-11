@@ -16,4 +16,7 @@ router.put("/:id", authenticateToken, visitedAPIController.edit);
 // Eliminar un visitado por su id
 router.delete("/:id", authenticateToken, visitedAPIController.remove);
 
+// Extraer los visitados con datos y agrupados por tipo
+router.get("/with-data", authenticateToken, visitedAPIController.getWithData);
+
 export default router;

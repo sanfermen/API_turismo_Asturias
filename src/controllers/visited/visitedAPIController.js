@@ -59,9 +59,21 @@ async function remove(req, res) {
 	}
 }
 
+async function getWithData(req, res) {
+	try {
+		const user_id = req.user.user_id;
+		const result = await visitedController.getWithData(user_id);
+		res.json(result);
+	} catch (error) {
+		console.error(error);
+		res.status(error.statusCode || 500).json({error: error.message});
+	}
+}
+
 export default {
 	create,
 	getByUserId,
 	edit,
-	remove
+	remove,
+	getWithData
 }
