@@ -85,3 +85,8 @@ Para registrar usuarios normales:
 El rol por defecto es **user**.
 
 El **admin** solo se puede crear manualmente en la base de datos.
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más información.
+
