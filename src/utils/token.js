@@ -11,8 +11,13 @@ function createToken(userData) {
 }
 
 function verifyToken(token) {
-    const result = jwt.verify(token, JWT_SECRET);
-    return result
+	try { 
+		const result = jwt.verify(token, JWT_SECRET);
+		return result;
+	} catch (err) {
+		console.error("fallo en verifytoken", err);
+		throw err;
+	}
 }
 
 export {

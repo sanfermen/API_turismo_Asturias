@@ -1,6 +1,6 @@
 import visitedController from "./visitedController.js";
 
-export async function create(req, res) {
+async function create(req, res) {
 	try {
 		const result = await visitedController.create(req.body);
 		res.json(result);
@@ -14,9 +14,9 @@ export async function create(req, res) {
 	}
 }
 
-export async function getByUserId(req, res) {
+async function getByUserId(req, res) {
 	try {
-		const id = req.params.id;
+		const id = req.user.user_id;
 		const result = await visitedController.getByUserId(id);
 		res.json(result);
 	} catch (error) {
@@ -29,7 +29,7 @@ export async function getByUserId(req, res) {
 	}
 }
 
-export async function edit(req, res) {
+async function edit(req, res) {
 	try {
 		const id = req.params.id;
 		const result = await visitedController.edit(id, req.body);
@@ -44,7 +44,7 @@ export async function edit(req, res) {
 	}
 }
 
-export async function remove(req, res) {
+async function remove(req, res) {
 	try {
 		const id = req.params.id;
 		const result = await visitedController.remove(id);
@@ -57,4 +57,23 @@ export async function remove(req, res) {
 			res.status(500).json({ error: "Error del servidor" });
 		}
 	}
+}
+
+async function getWithData(req, res) {
+	try {
+		const user_id = req.user.user_id;
+		const result = await visitedController.getWithData(user_id);
+		res.json(result);
+	} catch (error) {
+		console.error(error);
+		res.status(error.statusCode || 500).json({error: error.message});
+	}
+}
+
+export default {
+	create,
+	getByUserId,
+	edit,
+	remove,
+	getWithData
 }

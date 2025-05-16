@@ -36,11 +36,13 @@ async function login(req, res) {
 		const result = await authController.login(email, password);
 
 		const data = {
+			name: result.name,
 			user_id: result.user_id,
+			email: result.email,
 			role: result.role
 		};
 		const token = createToken(data);
-		res.json({token});
+		res.json({token:token, user:data});
 	} catch (error) {
 		console.error(error);
 		if (error.statusCode) {
@@ -55,8 +57,15 @@ function logout(req, res) {
     res.json({ message: "Sesión cerrada correctamente" });
 }
 
+async function getUserInfo(req, res) {
+	const userId = req.user.user_id;
+	const result = await authController.getUserInfo(userId);
+	res.send({user: result});
+}
+
 export default {
 	register,
 	login,
-	logout
+	logout,
+	getUserInfo
 };
