@@ -4,3 +4,5 @@ node_modules
 asturias.mwb.bak
 loginMiddleware.js
 
+2-insert_users.sql
+database/scripts/2-insert_users.sql
